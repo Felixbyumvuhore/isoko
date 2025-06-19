@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="rw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ikirayi Market</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .header,
+        .footer {
+            background: #2d5016;
+            color: white;
+        }
+
+        .header {
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .header .logo::before {
+            content: "🛒";
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: white;
+            color: #2d5016;
+        }
+
+        .nav-menu {
+            background: #4a7c23;
+            padding: 10px 0;
+        }
+
+        .nav-menu-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .menu-btn {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .menu-btn:hover,
+        .menu-btn.active {
+            background: white;
+            color: #2d5016;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #4a7c23, #f39c12);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .features {
+            background: white;
+            padding: 60px 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .features h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2d5016;
+        }
+
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            color: #2d5016;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-section h2 {
+            margin-bottom: 20px;
+            color: #2d5016;
+            text-align: center;
+        }
+
+        form {
+            display: grid;
+            gap: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        form label {
+            font-weight: 600;
+            color: #2d5016;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            outline: none;
+            border-color: #4a7c23;
+            box-shadow: 0 0 5px rgba(74, 124, 35, 0.3);
+        }
+
+        form button {
+            width: fit-content;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            background: #4a7c23;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            transition: 0.3s;
+            justify-self: center;
+        }
+
+        form button:hover {
+            background: #3e6220;
+            transform: translateY(-2px);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-card h3 {
+            color: #2d5016;
+            margin-bottom: 10px;
+        }
+
+        .product-card .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f39c12;
+            margin: 10px 0;
+        }
+
+        .product-card .farmer {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .product-card button {
+            width: 100%;
+            padding: 10px;
+            background: #4a7c23;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .product-card button:hover {
+            background: #3e6220;
+        }
+
+        .farmers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .farmer-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .farmer-card .avatar {
+            width: 60px;
+            height: 60px;
+            background: #4a7c23;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin: 0 auto 15px;
+        }
+
+        .farmer-card h3 {
+            color: #2d5016;
+            margin-bottom: 5px;
+        }
+
+        .farmer-card .location {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .farmer-card .crops {
+            color: #f39c12;
+            font-weight: 600;
+        }
+
+        .footer {
+            padding: 30px 20px;
+            margin-top: 20px;
+        }
+
+        .footer .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .footer h3 {
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+        }
+
+        .footer a:hover {
+            color: #f39c12;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #444;
+            padding-top: 15px;
+            margin-top: 20px;
+            color: #999;
+        }
+
+        .alert {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2d5016;
+        }
+
+        .user-info {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .user-info h3 {
+            color: #2d5016;
+            margin-bottom: 5px;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+
+        @media(max-width:768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-menu-container {
+                flex-wrap: wrap;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container flex">
+            <div class="logo">Ikirayi Market</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showSection('home')">🏠 Ahabanza</a></li>
+                    <li><a href="#" onclick="showSection('products')">🛒 Ibicuruzwa</a></li>
+                    <li><a href="#" onclick="showSection('farmers')">👥 Abahinzi</a></li>
+                    <li><a href="#" onclick="showSection('contact')">📱 Twibwire</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="nav-menu">
+        <div class="container nav-menu-container">
+            <a href="#" class="menu-btn" onclick="showSection('login')">Injira</a>
+            <a href="#" class="menu-btn" onclick="showSection('buyer-signup')">Iyandikishe (Muguzi)</a>
+            <a href="#" class="menu-btn" onclick="showSection('farmer-signup')">Iyandikishe (Umuhinzi)</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Murakaza neza ku Isoko Nkuru ry'Abahinzi</h1>
+            <p>Gura ibihingwa byiza biva ku bahinzi ba Rwanda. Dufasha abahinzi gushyira ibicuruzwa byabo ku isoko nkuru
+                kandi bigerweho byihuse.</p>
+            <div class="hero-buttons">
+                <a href="#" class="hero-btn btn-primary" onclick="showSection('products')">🛒 Reba Ibicuruzwa</a>
+                <a href="#" class="hero-btn btn-secondary" onclick="showSection('farmers')">👥 Bona Abahinzi</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Ibyo Tuguhesha</h2>
+            <div class="features-container">
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Ibicuruzwa Byiza</h3>
+                    <p>Ibihingwa bitunganyirijwe neza kandi bikuzanwa n'ubuhanga.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Kohereza Byihuse</h3>
+                    <p>Dutanga serivisi yoherezwa mu Rwanda hose mu minsi 2–3 gusa.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Ibiciro Byiza</h3>
+                    <p>Ibiciro byacu birahendutse kandi bihuye n'ubuziranenge.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login" class="form-section">
+        <div class="container">
+            <div class="login-form">
+                <h2>Injira</h2>
+                <form id="loginForm">
+                    <label for="l-email">Imeli</label>
+                    <input type="email" id="l-email" required>
+                    <label for="l-password">Ijambo Ryibanga</label>
+                    <input type="password" id="l-password" required>
+                    <button type="submit">Injira</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buyer Signup Section -->
+    <section id="buyer-signup" class="form-section">
+        <div class="container">
+            <h2>Iyandikishe nk'Umuguzi</h2>
+            <form id="buyerSignupForm">
+                <label for="b-name">Amazina</label>
+                <input type="text" id="b-name" required>
+                <label for="b-email">Imeli</label>
+                <input type="email" id="b-email" required>
+                <label for="b-phone">Telefoni</label>
+                <input type="tel" id="b-phone" required>
+                <label for="b-password">Ijambo Ryibanga</label>
+                <input type="password" id="b-password" required>
+                <button type="submit">Iyandikishe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Farmer Signup Section -->
+    <section id="farmer-signup" class="form-section">
+        <div class="container">
+            <h2>Iyandikishe nk'Umuhinzi</h2>
+            <form id="farmerSignupForm">
+                <label for="f-name">Amazina</label>
+                <input type="text" id="f-name" required>
+                <label for="f-email">Imeli</label>
+                <input type="email" id="f-email" required>
+                <label for="f-phone">Telefoni</label>
+                <input type="tel" id="f-phone" required>
+                <label for="f-region">Akarere</label>
+                <input type="text" id="f-region" required>
+                <label for="f-crops">Ibihingwa</label>
+                <input type="text" id="f-crops" placeholder="Umuceri, Ibishyimbo, Imyumbati" required>
+                <label for="f-password">Ijambo Ryibanga</label>
+                <input type="password" id="f-password" required>
+                <button type="submit">Iyandikishe Umuhinzi</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="form-section">
+        <div class="container">
+            <h2>Ibicuruzwa</h2>
+            <div id="userSection"></div>
+
+            <!-- Add Product Form (for farmers) -->
+            <div id="addProductSection" style="display:none;">
+                <h3>Ongera Igicuruzwa</h3>
+                <form id="addProductForm">
+                    <label for="p-title">Izina ry'Igicuruzwa</label>
+                    <input type="text" id="p-title" required>
+                    <label for="p-description">Ibisobanuro</label>
+                    <textarea id="p-description" rows="4" required></textarea>
+                    <label for="p-price">Igiciro (RWF)</label>
+                    <input type="number" id="p-price" required>
+                    <label for="p-quantity">Umubare (kg)</label>
+                    <input type="number" id="p-quantity" required>
+                    <button type="submit">Ongeraho</button>
+                </form>
+            </div>
+
+            <!-- Products Display -->
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </section>
+
+    <!-- Farmers Section -->
+    <section id="farmers" class="form-section">
+        <div class="container">
+            <h2>Abahinzi</h2>
+            <div class="farmers-grid" id="farmersGrid"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="form-section">
+        <div class="container">
+            <h2>Twebwire</h2>
+            <form id="contactForm">
+                <label for="c-name">Amazina</label>
+                <input type="text" id="c-name" required>
+                <label for="c-email">Imeli</label>
+                <input type="email" id="c-email" required>
+                <label for="c-message">Ubutumwa</label>
+                <textarea id="c-message" rows="4" required></textarea>
+                <button type="submit">Ohereza</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div>
+                <h3>Ikirayi Market</h3>
+                <p>Isoko nkuru ry'abahinzi b'u Rwanda. Tugufasha kubona ibicuruzwa byiza kandi by'umwimerere.</p>
+            </div>
+            <div>
+                <h3>Ihuza</h3>
+                <p>📞 +250 784010076</p>
+                <p>✉️ info@ikirayi.rw</p>
+                <p>📍 musanze, Rwanda</p>
+            </div>
+            <div>
+                <h3>Ibikorwa</h3>
+                <a href="#" onclick="showSection('products')">Ibicuruzwa</a>
+                <a href="#" onclick="showSection('farmers')">Abahinzi</a>
+                <a href="#" onclick="showSection('contact')">Ubufasha</a>
+                <a href="#">Amategeko</a>
+            </div>
+            <div>
+                <h3>Dukurikire</h3>
+                <a href="#" onclick="openLink('https://facebook.com')">📘 Facebook</a>
+                <a href="#" onclick="openLink('https://instagram.com')">📷 Instagram</a>
+                <a href="#" onclick="openLink('https://twitter.com')">🐦 Twitter</a>
+                <a href="#" onclick="openLink('https://youtube.com')">📺 YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2024 Ikirayi Market. Uburenganzira bwose burabitswe.
+        </div>
+    </footer>
+
+    <script>
+        // Initialize data storage
+        let users = [];
+        let products = [];
+        let currentUser = null;
+
+        // Sample data
+        function initializeData() {
+            products = [
+                { id: 1, title: "Umuceri Mwiza", description: "Umuceri utunganyirijwe neza", price: 800, quantity: 50, farmer: "Jean Uwimana", farmerLocation: "Huye" },
+                { id: 2, title: "Ibishyimbo Byera", description: "Ibishyimbo byiza byo mu Rwanda", price: 600, quantity: 30, farmer: "Marie Mukamana", farmerLocation: "Musanze" },
+                { id: 3, title: "Imyumbati Myiza", description: "Imyumbati itunganyirijwe neza", price: 400, quantity: 100, farmer: "Paul Habimana", farmerLocation: "Nyagatare" }
+            ];
+
+            users = [
+                { id: 1, name: "Jean Uwimana", email: "jean@test.com", phone: "0788123456", type: "farmer", region: "Huye", crops: "Umuceri, Ibishyimbo" },
+                { id: 2, name: "Marie Mukamana", email: "marie@test.com", phone: "0788123457", type: "farmer", region: "Musanze", crops: "Ibishyimbo, Imyumbati" },
+                { id: 3, name: "Paul Habimana", email: "paul@test.com", phone: "0788123458", type: "farmer", region: "Nyagatare", crops: "Imyumbati, Umuceri" }
+            ];
+        }
+
+        // Navigation functions
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show hero section if home is selected
+            if (sectionId === 'home') {
+                document.querySelector('.hero').style.display = 'block';
+                document.querySelector('.features').style.display = 'block';
+                return;
+            } else {
+                document.querySelector('.hero').style.display = 'none';
+                document.querySelector('.features').style.display = 'none';
+            }
+
+            // Show selected section
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+
+                // Load specific content
+                if (sectionId === 'products') {
+                    loadProducts();
+                    updateUserSection();
+                } else if (sectionId === 'farmers') {
+                    loadFarmers();
+                }
+            }
+
+            // Update active menu button
+            document.querySelectorAll('.menu-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+        }
+
+        // User management
+        function updateUserSection() {
+            const userSection = document.getElementById('userSection');
+            const addProductSection = document.getElementById('addProductSection');
+
+            if (currentUser) {
+                userSection.innerHTML = `
+          <div class="user-info">
+            <h3>Murakaza neza, ${currentUser.name}!</h3>
+            <p>Mwayinjiye nka: ${currentUser.type === 'farmer' ? 'Umuhinzi' : 'Umuguzi'}</p>
+            <button class="logout-btn" onclick="logout()">Gusohoka</button>
+          </div>
+        `;
+
+                if (currentUser.type === 'farmer') {
+                    addProductSection.style.display = 'block';
+                }
+            } else {
+                userSection.innerHTML = '<p>Injira kugirango ubone ibicuruzwa byose.</p>';
+                addProductSection.style.display = 'none';
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            updateUserSection();
+            showAlert('Mwarasohokaga neza!', 'success');
+        }
+
+        // Product management
+        function loadProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+          <h3>${product.title}</h3>
+          <p>${product.description}</p>
+          <div class="price">${product.price} RWF/kg</div>
+          <div class="farmer">Umuhinzi: ${product.farmer} (${product.farmerLocation})</div>
+          <p>Bihari: ${product.quantity} kg</p>
+          <button onclick="buyProduct(${product.id})">Gura</button>
+        `;
+                grid.appendChild(card);
+            });
+        }
+
+        function loadFarmers() {
+            const grid = document.getElementById('farmersGrid');
+            grid.innerHTML = '';
+
+            const farmers = users.filter(user => user.type === 'farmer');
+            farmers.forEach(farmer => {
+                const card = document.createElement('div');
+                card.className = 'farmer-card';
+                card.innerHTML = `
+          <div class="avatar">👨‍🌾</div>
+          <h3>${farmer.name}</h3>
+          <div class="location">📍 ${farmer.region}</div>
+          <div class="crops">🌾 ${farmer.crops}</div>
+        `;
+                grid.appendChild(card);
+            });
+        }
+
+        function buyProduct(productId) {
+            if (!currentUser) {
+                showAlert('Mbanza mwinjire kugirango mugure!', 'error');
+                showSection('login');
+                return;
+            }
+
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                const quantity = prompt(`Mufite gute ${product.title}? (Max: ${product.quantity} kg)`);
+                if (quantity && parseInt(quantity) > 0 && parseInt(quantity) <= product.quantity) {
+                    product.quantity -= parseInt(quantity);
+                    showAlert(`Mwaguze ${quantity}kg za ${product.title}. Tuzabamenyaniza!`, 'success');
+                    loadProducts();
+                }
+            }
+        }
+
+        // Form handlers
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = document.getElementById('l-email').value;
+            const password = document.getElementById('l-password').value;
+
+            // Simple validation (in real app, use proper authentication)
+            const user = users.find(u => u.email === email);
+            if (user) {
+                currentUser = user;
+                showAlert('Mwayinjiye neza!', 'success');
+                showSection('products');
+            } else {
+                showAlert('Email cyangwa ijambo ry\'ibanga si byo!', 'error');
+            }
+        });
+
+        document.getElementById('buyerSignupForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('b-name').value;
+            const email = document.getElementById('b-email').value;
+            const phone = document.getElementById('b-phone').value;
+
+            const newUser = {
+                id: users.length + 1,
+                name: name,
+                email: email,
+                phone: phone,
+                type: 'buyer'
+            };
+
+            users.push(newUser);
+            showAlert('Mwiyandikishije neza nk\'umuguzi!', 'success');
+            this.reset();
+        });
+
+        document.getElementById('farmerSignupForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('f-name').value;
+            const email = document.getElementById('f-email').value;
+            const phone = document.getElementById('f-phone').value;
+            const region = document.getElementById('f-region').value;
+            const crops = document.getElementById('f-crops').value;
+
+            const newUser = {
+                id: users.length + 1,
+                name: name,
+                email: email,
+                phone: phone,
+                type: 'farmer',
+                region: region,
+                crops: crops
+            };
+
+            users.push(newUser);
+            showAlert('Mwiyandikishije neza nk\'umuhinzi!', 'success');
+            this.reset();
+        });
+
+        document.getElementById('addProductForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!currentUser || currentUser.type !== 'farmer') {
+                showAlert('Gusa abahinzi bashobora kongera ibicuruzwa!', 'error');
+                return;
+            }
+
+            const title = document.getElementById('p-title').value;
+            const description = document.getElementById('p-description').value;
+            const price = parseInt(document.getElementById('p-price').value);
+            const quantity = parseInt(document.getElementById('p-quantity').value);
+
+            const newProduct = {
+                id: products.length + 1,
+                title: title,
+                description: description,
+                price: price,
+                quantity: quantity,
+                farmer: currentUser.name,
+                farmerLocation: currentUser.region
+            };
+
+            products.push(newProduct);
+            showAlert('Igicuruzwa cyongejwe neza!', 'success');
+            this.reset();
+            loadProducts();
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            showAlert('Ubutumwa bwoherejwe! Tuzagusubiza vuba.', 'success');
+            this.reset();
+        });
+
+        // Utility functions
+        function showAlert(message, type) {
+            // Remove existing alerts
+            document.querySelectorAll('.alert').forEach(alert => alert.remove());
+
+            const alert = document.createElement('div');
+            alert.className = `alert ${type}`;
+            alert.textContent = message;
+
+            document.body.insertBefore(alert, document.body.firstChild);
+
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        function openLink(url) {
+            window.open(url, '_blank');
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeData();
+            showSection('home');
+        });
+    </script>
+
+</body>
+
+</html>
